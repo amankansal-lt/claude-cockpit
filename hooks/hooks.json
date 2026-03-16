@@ -1,0 +1,36 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/check_enabled.py",
+            "timeout": 3
+          },
+          {
+            "type": "agent",
+            "prompt": "You are an auto-memory agent. Extract and persist valuable context from this Claude Code session.\n\nSession info from ARGUMENTS: $ARGUMENTS\nUse the transcript_path field to locate the JSONL transcript. The project memory directory is at the same level as the transcript (sibling directory called 'memory/auto/').\n\nSteps:\n1. Use Bash to count user messages: grep -c '\"type\":\"user\"' <transcript_path>. If fewer than 3, skip.\n2. Use Bash to extract recent exchanges: grep '\"type\":\"user\"\\|\"type\":\"assistant\"' <transcript_path> | tail -30\n3. From those messages, identify ANY of:\n   - Decisions: architecture choices, tool/library selections, config changes\n   - Bugs fixed: root cause + what fixed it\n   - Environment discoveries: working commands, paths, port numbers, API patterns\n   - Deferred work: anything postponed ('do X later', 'revisit', 'TODO')\n   - Patterns: techniques that worked, gotchas, things to avoid\n4. If items found, determine auto dir from transcript_path (~/.claude/projects/<slug>/<session>.jsonl -> ~/.claude/projects/<slug>/memory/auto/). Create with mkdir -p.\n5. Write to <auto-dir>/<YYYY-MM-DD>.md (append if exists). Format:\n   ### HH:MM\n   - **Decision:** what — why\n   - **Finding:** what — evidence\n   - **Deferred:** what — context\n6. For deferred items, ALSO append to <project-dir>/memory/MEMORY.md under '## Deferred'.\n\nIMPORTANT: Err on the side of capturing MORE. A 2-line entry costs nothing; losing context costs hours. Only skip if the conversation is truly trivial (greetings, simple yes/no).",
+            "timeout": 60
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/check_enabled.py",
+            "timeout": 3
+          },
+          {
+            "type": "agent",
+            "prompt": "You are an auto-memory agent running BEFORE context compaction. After compaction, earlier messages are lost forever. Save a comprehensive session summary.\n\nSession info: $ARGUMENTS\nUse the transcript_path field directly.\n\nSteps:\n1. Use Bash: grep '\"type\":\"user\"\\|\"type\":\"assistant\"' <transcript_path> | tail -80\n2. Write a comprehensive summary (<50 lines) covering:\n   - What was accomplished\n   - Key decisions and why\n   - Bugs and root causes\n   - Environment setup, commands, paths\n   - Unresolved issues or blockers\n   - Deferred work with context\n3. Write to <auto-dir>/session-summary-<first-8-chars-of-session-id>.md\n4. If deferred items, ALSO append to <project-dir>/memory/MEMORY.md under '## Deferred'.\n\nBe SPECIFIC — include file paths, function names, error messages, exact commands.",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}

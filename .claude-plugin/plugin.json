@@ -1,0 +1,15 @@
+{
+  "name": "claude-cockpit",
+  "version": "1.0.0",
+  "description": "Auto-memory hooks for Claude Code — captures decisions, findings, and deferred items between sessions",
+  "author": {
+    "name": "Aman Kansal",
+    "url": "https://github.com/AmanKansal2012"
+  },
+  "homepage": "https://github.com/AmanKansal2012/claude-cockpit",
+  "repository": "https://github.com/AmanKansal2012/claude-cockpit",
+  "license": "MIT",
+  "keywords": ["memory", "auto-memory", "dashboard", "tui", "productivity"],
+  "hooks": "./hooks/hooks.json",
+  "commands": "./commands/"
+}

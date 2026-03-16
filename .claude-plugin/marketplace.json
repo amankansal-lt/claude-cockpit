@@ -1,0 +1,28 @@
+{
+  "name": "claude-cockpit",
+  "owner": {
+    "name": "Aman Kansal",
+    "email": "amankansal2012@gmail.com"
+  },
+  "metadata": {
+    "description": "Claude Cockpit — X-ray vision for Claude Code. TUI dashboard + auto-memory hooks.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "claude-cockpit",
+      "source": ".",
+      "description": "Auto-memory hooks that capture decisions, findings, and deferred items between Claude Code sessions. Includes PreCompact hook (saves context before compaction) and Stop hook (extracts session highlights).",
+      "version": "1.0.0",
+      "author": {
+        "name": "Aman Kansal"
+      },
+      "homepage": "https://github.com/AmanKansal2012/claude-cockpit",
+      "repository": "https://github.com/AmanKansal2012/claude-cockpit",
+      "license": "MIT",
+      "keywords": ["memory", "auto-memory", "dashboard", "tui", "productivity", "context"],
+      "category": "productivity",
+      "tags": ["auto-memory", "context-preservation", "session-management"]
+    }
+  ]
+}

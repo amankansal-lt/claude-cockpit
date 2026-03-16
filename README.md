@@ -10,7 +10,15 @@
 
 ## Install
 
-### Binary (recommended — no Python needed)
+### Claude Code Plugin (auto-memory hooks only)
+
+```bash
+/plugin install AmanKansal2012/claude-cockpit
+```
+
+This installs the auto-memory hooks that capture decisions, findings, and deferred items between sessions. No binary or Python needed — runs inside Claude Code's own agent system.
+
+### Binary (recommended — full TUI dashboard, no Python needed)
 
 **Homebrew:**
 ```bash
