@@ -11,7 +11,10 @@
   "plugins": [
     {
       "name": "claude-cockpit",
-      "source": ".",
+      "source": {
+        "source": "github",
+        "repo": "AmanKansal2012/claude-cockpit"
+      },
       "description": "Auto-memory hooks that capture decisions, findings, and deferred items between Claude Code sessions. Includes PreCompact hook (saves context before compaction) and Stop hook (extracts session highlights).",
       "version": "1.0.0",
       "author": {
