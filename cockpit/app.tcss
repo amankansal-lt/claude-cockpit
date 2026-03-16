@@ -73,9 +73,34 @@ ContentSwitcher {
 }
 
 /* ---------- Tasks Tab ---------- */
+#tasks-outer {
+    height: 1fr;
+}
+
+#task-search {
+    dock: top;
+    height: 3;
+    padding: 0 1;
+}
+
+#task-search Input {
+    width: 1fr;
+}
+
 #tasks-container {
     padding: 1 2;
     overflow-y: auto;
+}
+
+.task-session-header {
+    padding: 0 1;
+    margin-top: 1;
+    background: $primary-background;
+    height: auto;
+}
+
+.task-session-header:hover {
+    background: $accent;
 }
 
 .task-group-title {
@@ -89,6 +114,37 @@ ContentSwitcher {
     margin: 0 0 0 2;
     padding: 0 1;
     height: auto;
+}
+
+.task-active {
+    background: $primary-background;
+}
+
+.session-card {
+    padding: 0 1;
+    height: auto;
+    margin-bottom: 0;
+}
+
+.session-card:hover {
+    background: $accent;
+}
+
+.nav-item {
+    /* navigable items in Tasks tab */
+}
+
+.nav-selected {
+    background: $accent;
+}
+
+/* ---------- Conversation Rename ---------- */
+#conv-rename-input {
+    dock: top;
+    height: 3;
+    width: 1fr;
+    background: $panel;
+    border: tall $accent;
 }
 
 /* ---------- Plans Tab ---------- */
@@ -105,8 +161,8 @@ ContentSwitcher {
 }
 
 #plans-preview {
-    width: 1fr;
     padding: 0 1;
+    height: 1fr;
     overflow-y: auto;
 }
 
@@ -146,11 +202,132 @@ ContentSwitcher {
     background: $primary-background;
 }
 
+/* ---------- Conversations Tab ---------- */
+#conv-container {
+    layout: horizontal;
+    height: 1fr;
+}
+
+#conv-sidebar {
+    width: 42;
+    border-right: tall $primary-background;
+}
+
+#conv-search {
+    dock: top;
+    height: 3;
+    padding: 0 1;
+}
+
+#conv-search Input {
+    width: 1fr;
+}
+
+#conv-session-list {
+    height: 1fr;
+    overflow-y: auto;
+    padding: 0 1;
+}
+
+.session-item {
+    padding: 0 1;
+    height: auto;
+    margin-bottom: 1;
+}
+
+.session-item:hover {
+    background: $primary-background;
+}
+
+#conv-preview {
+    width: 1fr;
+    padding: 0 1;
+}
+
+#conv-title {
+    dock: top;
+    height: 1;
+    background: $primary-background;
+    color: $text;
+    padding: 0 1;
+    text-style: bold;
+}
+
+#conv-messages {
+    height: 1fr;
+    overflow-y: auto;
+    padding: 0 1;
+}
+
+.msg-user {
+    border-left: tall cyan;
+    padding: 0 1;
+    margin-bottom: 1;
+    height: auto;
+}
+
+.msg-assistant {
+    border-left: tall green;
+    padding: 0 1;
+    margin-bottom: 1;
+    height: auto;
+}
+
+.conv-load-more {
+    width: 100%;
+    margin-bottom: 1;
+}
+
+/* ---------- Plans Preview ---------- */
+#plans-preview-container {
+    width: 1fr;
+    height: 1fr;
+}
+
+#plans-preview-title {
+    dock: top;
+    height: 1;
+    background: $primary-background;
+    color: $text;
+    padding: 0 1;
+    text-style: bold;
+}
+
+/* ---------- Conversation Message Search ---------- */
+#conv-msg-search {
+    dock: top;
+    height: 3;
+    padding: 0 1;
+}
+
+#conv-msg-search Input {
+    width: 1fr;
+}
+
+/* ---------- Memory Edit Mode ---------- */
+#memory-edit-area {
+    height: 1fr;
+}
+
+/* ---------- Plans Inline Rename ---------- */
+#plans-rename-input {
+    dock: top;
+    height: 3;
+    width: 1fr;
+    background: $panel;
+    border: tall $accent;
+}
+
+/* ---------- Plans Edit Mode ---------- */
+#plans-edit-area {
+    height: 1fr;
+}
+
 /* ---------- Context Gauge ---------- */
 #context-gauge {
-    dock: bottom;
     height: 1;
     background: $panel;
+    color: $text;
     padding: 0 1;
 }
 

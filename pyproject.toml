@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "claude-cockpit"
-version = "0.2.0"
+version = "1.0.0"
 description = "X-ray vision for your Claude Code brain — TUI dashboard"
 readme = "README.md"
 license = "MIT"

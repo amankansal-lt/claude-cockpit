@@ -1,0 +1,59 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build macOS arm64 binary
+    runs-on: macos-14  # Apple Silicon runner
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pyinstaller textual rich watchfiles
+
+      - name: Build binary
+        run: |
+          python -m PyInstaller cockpit.spec --noconfirm
+          chmod +x dist/cockpit
+
+      - name: Smoke test
+        run: |
+          ./dist/cockpit --version
+
+      - name: Get version
+        id: version
+        run: |
+          VERSION=$(python -c "from cockpit import __version__; print(__version__)")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Package
+        run: |
+          cd dist
+          zip "cockpit-${{ steps.version.outputs.version }}-macos-arm64.zip" cockpit
+          shasum -a 256 "cockpit-${{ steps.version.outputs.version }}-macos-arm64.zip" \
+            > "cockpit-${{ steps.version.outputs.version }}-macos-arm64.zip.sha256"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Claude Cockpit v${{ steps.version.outputs.version }}"
+          generate_release_notes: true
+          files: |
+            dist/cockpit-${{ steps.version.outputs.version }}-macos-arm64.zip
+            dist/cockpit-${{ steps.version.outputs.version }}-macos-arm64.zip.sha256

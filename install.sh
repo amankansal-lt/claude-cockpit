@@ -104,15 +104,18 @@ cockpit-toggle() {
         echo "Cockpit not installed. Run: cd $script_dir && ./install.sh"
         return 1
     fi
-    local cockpit_cmd="\"$cockpit_python\" -m cockpit"
+    local cockpit_cmd="$cockpit_python -m cockpit"
     if [ "${TERM_PROGRAM:-}" = "iTerm.app" ]; then
-        osascript -e "
-            tell application \"iTerm2\"
+        osascript <<APPLEOF
+            tell application "iTerm2"
                 tell current session of current tab of current window
-                    split vertically with default profile command \"$cockpit_cmd\"
+                    split vertically with default profile command "$cockpit_cmd"
                 end tell
             end tell
-        " 2>/dev/null || eval "$cockpit_cmd"
+APPLEOF
+        if [ $? -ne 0 ]; then
+            eval "$cockpit_cmd"
+        fi
     else
         eval "$cockpit_cmd"
     fi
