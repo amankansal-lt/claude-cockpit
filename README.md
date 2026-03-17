@@ -10,15 +10,21 @@
 
 ## Install
 
-### Claude Code Plugin (auto-memory hooks only)
+### Claude Code Plugin
 
-```bash
-/plugin install AmanKansal2012/claude-cockpit
+```
+/plugin marketplace add AmanKansal2012/claude-cockpit
+/plugin install claude-cockpit@claude-cockpit
 ```
 
-This installs the auto-memory hooks that capture decisions, findings, and deferred items between sessions. No binary or Python needed — runs inside Claude Code's own agent system.
+Installs auto-memory hooks directly into Claude Code. On every session stop and before context compaction, Claude automatically saves decisions, findings, and deferred items to `~/.claude/projects/<project>/memory/auto/`. No binary or Python needed.
 
-### Binary (recommended — full TUI dashboard, no Python needed)
+After install, toggle auto-memory with `a` in the Cockpit TUI, or manually:
+```bash
+echo '{"auto_memory": true}' > ~/.claude/cockpit-settings.json
+```
+
+### Binary (full TUI dashboard, no Python needed)
 
 **Homebrew:**
 ```bash
